@@ -99,12 +99,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   container2: {
-    //display: 'flex',
     flexDirection: 'column',
     width: '55%',
   },
   container3: {
-    //display: 'flex',
     flexDirection: 'row',
     alignContent: 'flex-end',
     alignItems: 'flex-end',

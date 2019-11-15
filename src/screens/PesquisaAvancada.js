@@ -98,8 +98,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   container2: {
-    //padding: 5,
-    //marginTop: 10,
     backgroundColor: '#CCCCCC',
   },
   container3: {

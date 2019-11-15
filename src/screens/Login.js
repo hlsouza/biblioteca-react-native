@@ -5,6 +5,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Text,
+  StatusBar,
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
@@ -35,6 +36,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#B0C4DE" barStyle="light-content" />
         <View style={styles.containerHeader}>
           <Image source={require('../../assets/imgs/livro_logo.png')}></Image>
         </View>
@@ -76,13 +78,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    //justifyContent: 'center', //centralizar vercalmente
     backgroundColor: '#B0C4DE',
   },
   containerHeader: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: '35%', //retirar se for centralizar verticalmente
     marginBottom: 20,
   },
   containerForm: {
