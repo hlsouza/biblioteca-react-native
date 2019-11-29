@@ -17,8 +17,8 @@ export default class Card extends Component {
   }
 
   removeLivroClick = () => {
-    //Api.delete('/api/biblioteca/livro/' + this.props.id)
-    Api.delete(`/api/biblioteca/livro/${this.props.id}`)
+    //Api.delete('/api/livro/' + this.props.id)
+    Api.delete(`/api/livro/${this.props.id}`)
       .then(() => {
         Alert.alert('Livro removido!');
         Actions.home();
@@ -26,7 +26,6 @@ export default class Card extends Component {
       .catch(error => {
         Alert.alert('Erro: ' + error);
       });
-    //this.props.setStateLivrosZerar()
   };
 
   editaLivroClick = () => {

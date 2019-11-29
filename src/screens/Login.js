@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Text,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
@@ -17,6 +18,7 @@ export default class Login extends React.Component {
       login: '',
       senha: '',
       errorLogin: false,
+      autenticado: false,
     };
   }
 
@@ -25,12 +27,20 @@ export default class Login extends React.Component {
   };
 
   handleClickLogin = () => {
-    if (this.state.login === 'Admin' && this.state.senha === 'admin') {
-      this.setState({errorLogin: false});
-      Actions.home();
-    } else {
-      this.setState({errorLogin: true});
-    }
+    params = '?login=' + this.state.login + '&password=' + this.state.senha;
+    Api.get('/api/user/autentica' + params)
+      .then(response => {
+        this.setState({autenticado: response.data});
+        if (this.state.autenticado == true) {
+          this.setState({errorLogin: false});
+          Actions.home();
+        } else {
+          this.setState({errorLogin: true});
+        }
+      })
+      .catch(error => {
+        Alert.alert('Erro: ' + error);
+      });
   };
 
   render() {
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //flexDirection: 'column',
     justifyContent: 'flex-start',
-    //justifyContent: 'center', //centralizar vercalmente
+    //justifyContent: 'center', //centralizar verticalmente
     backgroundColor: '#B0C4DE',
   },
   containerHeader: {

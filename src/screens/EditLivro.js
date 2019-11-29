@@ -27,7 +27,6 @@ export default class EditLivro extends Component {
       ano: props.ano.toString(),
       editora: props.editora
     }
-    //Alert.alert('id: ' + props.id + 'ano: ' + props.ano)
   }
   
  editLivro = () => {
@@ -35,7 +34,7 @@ export default class EditLivro extends Component {
       Alert.alert('Error: Algum campo preenchido de forma incorreta!')
       return;
     }      
-    Api.put(`/api/biblioteca/livro/${this.state.id}`,
+    Api.put(`/api/livro/${this.state.id}`,
      {  titulo: this.state.titulo, 
         autor: this.state.autor, 
         ano: this.state.ano,
@@ -54,7 +53,6 @@ export default class EditLivro extends Component {
     dadosInvalidos = false
     if (this.state.titulo === '' || this.state.titulo === null || this.state.titulo === undefined) {
       dadosInvalidos = true
-      //Alert.alert('Titulo: ' + this.state.titulo + 'DadosInvalidos: ' + dadosInvalidos)
     }
     if (this.state.autor === '' || this.state.autor === null || this.state.autor === undefined) {
       dadosInvalidos = true;
@@ -71,7 +69,6 @@ export default class EditLivro extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/*<Text>{this.state.titulo}</Text>*/}
         <TextInput style={styles.item} label='Título' value={this.state.titulo} onChangeText={ (titulo) => this.setState( {titulo} ) } />
         <TextInput style={styles.item} label='Autor' value={this.state.autor} onChangeText={ (autor) => this.setState({autor})} />
         <TextInput style={styles.item} label='Ano' keyboardType='numeric' maxLength={4} value={this.state.ano} onChangeText={ (ano) => this.setState({ano})} />
@@ -92,7 +89,8 @@ const styles = StyleSheet.create({
   },
   item: {
     height: 45,
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: '#ffffff',
   },
   activityIndicator: {
     marginTop: 300,

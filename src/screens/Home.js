@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Api from '../services/Api';
 import Card from '../components/Card';
+import PesquisaAvancadaModal from '../components/PesquisaAvancadaModal';
 import {Appbar, Button} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
 
@@ -16,17 +17,20 @@ export default class Home extends Component {
   static navigationOptions = {
     header: null,
   };
-
-  constructor() {
-    super();
+ 
+  constructor(props) {
+    super(props);
     this.state = {
       livros: [],
       loading: true,
+      modalVisible: false,
     };
+    this.modalVisibleHandler = this.modalVisibleHandler.bind(this)
+    this.pesquisaAvancadaHandler = this.pesquisaAvancadaHandler.bind(this)
   }
 
   componentDidMount() {
-    Api.get('/api/biblioteca/livro')
+    Api.get('/api/livro')
       .then(response => {
         this.setState({livros: response.data, loading: false});
       })
@@ -35,13 +39,29 @@ export default class Home extends Component {
       });
   }
 
+  modalVisibleHandler(visible) {
+    this.setState({modalVisible: visible})
+  }
+
+  pesquisaAvancadaHandler(livros) {
+    this.setState({livros: livros})
+  }
+
   addLivroClick = () => {
     Actions.addLivro();
   };
+  
+  showHideModal = () => { 
+      this.setState({modalVisible: !this.state.modalVisible})
+  }
 
-  pesquisaAvancadaClick = () => {
-    Actions.pesquisaAvancada();
-  };
+  showModal = () => {
+    this.setState({modalVisible: true})
+  }
+
+  hideModal = () => {
+    this.setState({modalVisible: false})
+  }
 
   render() {
     const livros = this.state.livros.map(livro => (
@@ -52,12 +72,11 @@ export default class Home extends Component {
         autor={livro.autor}
         ano={livro.ano}
         editora={livro.editora}
-        setStateEditora={this.setStateEditora}
       />
     ));
     return (
       <View style={styles.container}>
-      <StatusBar backgroundColor="#3169E1" barStyle="light-content" />
+        <StatusBar backgroundColor="#3169E1" barStyle="light-content" />
         <View>
           <Appbar style={styles.appbar}>
             <Button
@@ -71,7 +90,7 @@ export default class Home extends Component {
               color="#FFFFFF"
               icon="folder-search-outline"
               mode="text"
-              onPress={this.pesquisaAvancadaClick}>
+              onPress={this.showModal}>
               Pesquisar
             </Button>
           </Appbar>
@@ -88,6 +107,8 @@ export default class Home extends Component {
           )}
           {!this.state.loading && livros}
         </ScrollView>
+        <PesquisaAvancadaModal visible={this.state.modalVisible} visibleHandler={this.modalVisibleHandler}
+          livrosHandler={this.pesquisaAvancadaHandler} />
       </View>
     );
   }

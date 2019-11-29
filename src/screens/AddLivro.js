@@ -29,23 +29,12 @@ export default class AddLivro extends Component {
   }
   
  saveLivro = () => {
-   /*   
-   const livro = { ano: this.state.ano,
-     autor: this.state.autor,
-     editora: this.state.editora, 
-     titulo: this.state.titulo       
-   }
-    Api.post('/api/biblioteca/livro', { livro })
-      .then( (res) => { Alert.alert('Livro ' + res.data.livro.titulo + ' cadastrado!')})
-      .catch( (error) => { Alert.alert('Erro: ' + error)})
-    */
-    
     if (this.dadosInvalidos()) {
       Alert.alert('Error: Algum campo preenchido de forma incorreta!')
       return;
     }
       
-    Api.post('/api/biblioteca/livro',
+    Api.post('/api/livro',
      {  titulo: this.state.titulo, 
         autor: this.state.autor, 
         ano: this.state.ano,
@@ -64,7 +53,6 @@ export default class AddLivro extends Component {
     dadosInvalidos = false
     if (this.state.titulo === '' || this.state.titulo === null || this.state.titulo === undefined) {
       dadosInvalidos = true
-      //Alert.alert('Titulo: ' + this.state.titulo + 'DadosInvalidos: ' + dadosInvalidos)
     }
     if (this.state.autor === '' || this.state.autor === null || this.state.autor === undefined) {
       dadosInvalidos = true;
@@ -81,7 +69,6 @@ export default class AddLivro extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/*<Text>{this.state.titulo}</Text>*/}
         <TextInput style={styles.item} label='Título' value={this.state.titulo} onChangeText={ (titulo) => this.setState( {titulo} ) } />
         <TextInput style={styles.item} label='Autor' value={this.state.autor} onChangeText={ (autor) => this.setState({autor})} />
         <TextInput style={styles.item} label='Ano' keyboardType='numeric' maxLength={4} value={this.state.ano} onChangeText={ (ano) => this.setState({ano})} />
@@ -102,7 +89,8 @@ const styles = StyleSheet.create({
   },
   item: {
     height: 45,
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: 'white',
   },
   activityIndicator: {
     marginTop: 300,

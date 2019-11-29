@@ -53,10 +53,10 @@ export default class PesquisaAvancada extends Component {
   pesquisaAvancadaClick = () => {
     this.setState({loading: true})
     query = this.montaQuery()
-    Api.get('/api/biblioteca/livroBuscaAvancada' + query)
+    Api.get('/api/livroBuscaAvancada' + query)
     .then( (response) => { this.setState( {livros: response.data, loading: false } )})
     .catch( (error) => { Alert.alert('Erro: ' + error)})
-    //Alert.alert('/api/biblioteca/livroBuscaAvancada' + query)
+    //Alert.alert('/api/livroBuscaAvancada' + query)
   }
 
   render() {
