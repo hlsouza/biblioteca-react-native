@@ -1,6 +1,6 @@
-* CRUD de uma biblioteca feita em React Native com funções de listar, adicionar, editar e remover livros, além de pesquisa avançada.
+** CRUD de uma biblioteca feita em React Native com funções de listar, adicionar, editar e remover livros, além de pesquisa avançada.
 
-* Diferenciais
+*** Diferenciais
 
 1) consumo dados de uma rest api spring boot (java)
 2) icone personalizado da aplicacao
